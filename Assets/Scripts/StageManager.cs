@@ -17,7 +17,6 @@ public class StageManager : MonoBehaviour
         {
             for (int dx = 0; dx < width; dx++)
             {
-                //Instantiate(plane, new Vector3(i * distance, 0, j), transform.rotation);
                 if(dz % 2 == 0)
                 {
                     Instantiate(plane, new Vector3(dx * distance, 0, dz * distance * Mathf.Sin(Mathf.PI / 3)), transform.rotation);

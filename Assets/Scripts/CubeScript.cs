@@ -13,9 +13,9 @@ public class CubeScript : MonoBehaviour
 
     private void Start()
     {
-        colors[0] = new Color32(255, 100, 100, 255);
-        colors[1] = new Color32(255, 255, 100, 255);
-        colors[2] = new Color32(100, 100, 255, 255);
+        colors[0] = new Color32(255, 127, 127, 255);
+        colors[1] = new Color32(255, 255, 127, 255);
+        colors[2] = new Color32(127, 191, 255, 255);
 
         colorNum = Random.Range(0, 3);
 
