@@ -41,31 +41,36 @@ public class PlayerScript : MonoBehaviour
 
         //StagePanelSelect
         Ray mouseCursorRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+        
         if(Physics.Raycast(mouseCursorRay,out mouseCursorHit))
         {
             if(mouseCursorHit.collider.gameObject.tag == "Panel")
             {
-                if (mouseCursorHit.collider.gameObject.GetComponent<PanelScript>().isSelected)
+                if (mouseCursorHit.collider.gameObject.GetComponent<PanelScript>().Selectable)
                 {
-                    //Debug.Log(mouseCursorHit.collider.gameObject.transform.position);
+                    Vector3 targetDir = mouseCursorHit.collider.gameObject.transform.position - transform.position;
+                    float targetAngle = Mathf.Atan2(targetDir.z, targetDir.x);
+                    targetAngle = -1 * Mathf.Rad2Deg * targetAngle + 90f;
+                    transform.rotation = Quaternion.Euler(0, targetAngle, 0);
+                    //Click to move
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        animator.SetBool("Jump", true);
+                        isMoving = true;
+
+                        for (int i = 0; i < 4; i++)
+                        {
+                            if (panel[i] != null)
+                            {
+                                panel[i].GetComponent<PanelScript>().PanelUP(false);
+                            }
+                        }
+                    }
                 }
             }
         }
 
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            animator.SetBool("Jump", true);
-            isMoving = true;
-
-            for (int i = 0; i < 4; i++)
-            {
-                if (panel[i] != null)
-                {
-                    panel[i].GetComponent<PanelScript>().PanelUP(false);
-                }
-            }
-        }
 
         if (!isMoving) {
             moveStart.transform.position = transform.position;

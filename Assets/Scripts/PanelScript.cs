@@ -11,7 +11,7 @@ public class PanelScript : MonoBehaviour
 
     public int colorNum;
     [System.NonSerialized]
-    public bool isSelected;
+    public bool Selectable;
 
     private void Start()
     {
@@ -23,7 +23,7 @@ public class PanelScript : MonoBehaviour
 
         targetRenderer = this.GetComponent<Renderer>();
         targetRenderer.material.SetColor("_BaseColor", colors[colorNum]);
-        isSelected = false;
+        Selectable = false;
     }
 
 
@@ -45,12 +45,12 @@ public class PanelScript : MonoBehaviour
         if (up)
         {
             transform.position += Vector3.up * 0.3f;
-            isSelected = true;
+            Selectable = true;
         }
         else
         {
             transform.position += Vector3.down * 0.3f;
-            isSelected = false;
+            Selectable = false;
         }
     }
 }
