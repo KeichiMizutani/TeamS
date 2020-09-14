@@ -1264,7 +1264,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100264, guid: dd6ec75974b69a3409711f8110698bbb, type: 3}
       propertyPath: m_Name
-      value: SD_unitychan_humanoid (2)
+      value: SD_unitychan_humanoid_player
       objectReference: {fileID: 0}
     - target: {fileID: 400264, guid: dd6ec75974b69a3409711f8110698bbb, type: 3}
       propertyPath: m_LocalPosition.x
