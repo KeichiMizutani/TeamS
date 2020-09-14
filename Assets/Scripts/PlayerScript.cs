@@ -13,7 +13,7 @@ public class PlayerScript : MonoBehaviour
     private GameObject moveGoal;
 
     private bool isMoving = false;
-    public float moveSpeed = 1.0f;
+    public float moveSpeed = 1.2f;
     private float moveTimer = 0;
 
     private float panelDistance = 1.75f;
