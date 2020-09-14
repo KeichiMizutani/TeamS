@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CubeScript : MonoBehaviour
+public class PanelScript : MonoBehaviour
 {
     public Color32[] colors = new Color32[3];
 
     [SerializeField]
     private Renderer targetRenderer;
 
-    int colorNum;
+    public int colorNum;
+    [System.NonSerialized]
+    public bool isSelected;
 
     private void Start()
     {
@@ -21,7 +23,7 @@ public class CubeScript : MonoBehaviour
 
         targetRenderer = this.GetComponent<Renderer>();
         targetRenderer.material.SetColor("_BaseColor", colors[colorNum]);
-
+        isSelected = false;
     }
 
 
@@ -35,6 +37,20 @@ public class CubeScript : MonoBehaviour
                 colorNum = 0;
             }
             targetRenderer.material.SetColor("_BaseColor", colors[colorNum]);
+        }
+    }
+
+    public void PanelUP(bool up)
+    {
+        if (up)
+        {
+            transform.position += Vector3.up * 0.3f;
+            isSelected = true;
+        }
+        else
+        {
+            transform.position += Vector3.down * 0.3f;
+            isSelected = false;
         }
     }
 }

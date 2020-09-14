@@ -676,7 +676,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plane: {fileID: 5921501945853580863, guid: dd2ca4aab056b614a947a81f57dc24b8, type: 3}
-  length: 15
+  length: 8
   width: 5
   distance: 1.75
 --- !u!4 &623657589
@@ -1298,7 +1298,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400264, guid: dd6ec75974b69a3409711f8110698bbb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.5
+      value: 1.75
       objectReference: {fileID: 0}
     - target: {fileID: 400264, guid: dd6ec75974b69a3409711f8110698bbb, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2343,6 +2343,7 @@ MonoBehaviour:
   moveStart: {fileID: 1761431404}
   moveGoal: {fileID: 702176725}
   moveSpeed: 1.5
+  panel: []
 --- !u!1 &2138677391
 GameObject:
   m_ObjectHideFlags: 0
