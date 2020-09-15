@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class PanelScript : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class PanelScript : MonoBehaviour
     public int colorNum;
     [System.NonSerialized]
     public bool Selectable;
+    [System.NonSerialized] public bool panelDisappear;
+
 
     private void Start()
     {
@@ -24,6 +27,9 @@ public class PanelScript : MonoBehaviour
         targetRenderer = this.GetComponent<Renderer>();
         targetRenderer.material.SetColor("_BaseColor", colors[colorNum]);
         Selectable = false;
+        panelDisappear = false;
+
+        PanelScaleUP(true);
     }
 
 
@@ -44,13 +50,25 @@ public class PanelScript : MonoBehaviour
     {
         if (up)
         {
-            transform.position += Vector3.up * 0.3f;
+            transform.DOLocalMove(new Vector3(transform.position.x, 0.3f, transform.position.z), 0.2f);
             Selectable = true;
         }
         else
         {
-            transform.position += Vector3.down * 0.3f;
+            transform.DOLocalMove(new Vector3(transform.position.x, 0, transform.position.z), 0.2f);
             Selectable = false;
+        }
+    }
+
+    public void PanelScaleUP(bool up)
+    {
+        if (up)
+        {
+            transform.DOScale(new Vector3(1, 1, 1), 0.8f);
+        }
+        else
+        {
+            transform.DOScale(new Vector3(0, 0, 0), 0.8f);
         }
     }
 }

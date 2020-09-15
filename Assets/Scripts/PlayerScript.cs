@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -19,7 +20,6 @@ public class PlayerScript : MonoBehaviour
     private float panelDistance = 1.75f;
     private GameObject[] panel;
     private RaycastHit mouseCursorHit;
-    private RaycastHit mouseClickHit;
 
 
 
@@ -31,7 +31,7 @@ public class PlayerScript : MonoBehaviour
         panel = new GameObject[4];
 
 
-        Invoke("PanelChecker", 0.1f);
+        Invoke("PanelChecker", 0.2f);
     }
 
 
@@ -51,7 +51,9 @@ public class PlayerScript : MonoBehaviour
                     Vector3 targetDir = mouseCursorHit.collider.gameObject.transform.position - transform.position;
                     float targetAngle = Mathf.Atan2(targetDir.z, targetDir.x);
                     targetAngle = -1 * Mathf.Rad2Deg * targetAngle + 90f;
+
                     transform.rotation = Quaternion.Euler(0, targetAngle, 0);
+
                     //Click to move
                     if (Input.GetMouseButtonDown(0))
                     {
@@ -113,7 +115,14 @@ public class PlayerScript : MonoBehaviour
                 panel[i] = null;
             }
         }
-        
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if(collision.gameObject.tag == "Panel")
+        {
+            collision.gameObject.GetComponent<PanelScript>().PanelScaleUP(false);
+        }
     }
 
 
