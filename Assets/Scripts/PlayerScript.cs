@@ -31,7 +31,7 @@ public class PlayerScript : MonoBehaviour
         panel = new GameObject[4];
 
 
-        Invoke("PanelChecker", 0.2f);
+        Invoke("PanelChecker", 1f);
     }
 
 

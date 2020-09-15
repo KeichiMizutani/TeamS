@@ -5,30 +5,29 @@ using DG.Tweening;
 
 public class PanelScript : MonoBehaviour
 {
-    public Color32[] colors = new Color32[3];
+    
+    Color32[] colors = new Color32[4];
 
-    [SerializeField]
-    private Renderer targetRenderer;
+    [SerializeField]private Renderer targetRenderer;
 
     public int colorNum;
-    [System.NonSerialized]
-    public bool Selectable;
+    [System.NonSerialized]public bool Selectable;
     [System.NonSerialized] public bool panelDisappear;
 
 
     private void Start()
     {
+
         colors[0] = new Color32(255, 127, 127, 255);
         colors[1] = new Color32(255, 255, 127, 255);
         colors[2] = new Color32(127, 191, 255, 255);
+        colors[3] = new Color32(255, 255, 255, 255);
 
-        colorNum = Random.Range(0, 3);
-
-        targetRenderer = this.GetComponent<Renderer>();
-        targetRenderer.material.SetColor("_BaseColor", colors[colorNum]);
         Selectable = false;
         panelDisappear = false;
 
+        colorNum = Random.Range(0, 3);
+        SetColor(colorNum);
         PanelScaleUP(true);
     }
 
@@ -69,6 +68,14 @@ public class PanelScript : MonoBehaviour
         else
         {
             transform.DOScale(new Vector3(0, 0, 0), 0.8f);
+            SetColor(3);
+            Destroy(this.gameObject, 1.0f);
         }
+    }
+
+    public void SetColor(int colorNum)
+    {
+        targetRenderer = this.GetComponent<Renderer>();
+        targetRenderer.material.SetColor("_BaseColor", colors[colorNum]);
     }
 }
