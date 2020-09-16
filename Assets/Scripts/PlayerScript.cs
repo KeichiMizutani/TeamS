@@ -8,19 +8,21 @@ public class PlayerScript : MonoBehaviour
 
     Animator animator;
 
-    [SerializeField]
-    private GameObject moveStart;
-    [SerializeField]
-    private GameObject moveGoal;
+    [SerializeField] private GameObject moveStart;
+    [SerializeField] private GameObject moveGoal;
+
+    [SerializeField] GameObject stageManager;
+    [SerializeField] GameObject stageCamera;
 
     private bool isMoving = false;
-    public float moveSpeed = 1.2f;
+    private float moveSpeed = 1.2f;
     private float moveTimer = 0;
 
     private float panelDistance = 1.75f;
     private GameObject[] panel;
     private RaycastHit mouseCursorHit;
 
+ 
 
 
     private void Start()
@@ -31,7 +33,7 @@ public class PlayerScript : MonoBehaviour
         panel = new GameObject[4];
 
 
-        Invoke("PanelChecker", 1f);
+        Invoke("PanelChecker", 1.0f);
     }
 
 
@@ -67,6 +69,27 @@ public class PlayerScript : MonoBehaviour
                                 panel[i].GetComponent<PanelScript>().PanelUP(false);
                             }
                         }
+
+                        //When go forward
+                        if(targetAngle <= 40.0f && targetAngle >= -40.0f)
+                        {
+                            RaycastHit hitInfo;
+                            for(int i = 0; i < 5; i++)
+                            {
+                                if(Physics.Raycast(new Vector3(0.4375f + i * 1.75f,1f,transform.position.z),Vector3.down, out hitInfo, 20f))
+                                {
+                                    if(hitInfo.collider.gameObject.tag == "Panel")
+                                    {
+                                        hitInfo.collider.gameObject.GetComponent<PanelScript>().PanelScaleUP(false);
+                                        
+                                    }
+                                }
+                            }
+
+                            stageManager.GetComponent<StageManager>().StartCoroutine("CreateNewPanel");
+
+                        }
+
                     }
                 }
             }
@@ -90,6 +113,7 @@ public class PlayerScript : MonoBehaviour
             }
         }
 
+        stageCamera.transform.position = new Vector3(stageCamera.transform.position.x, stageCamera.transform.position.y,transform.position.z - 6.5f);
 
     }
 
@@ -130,4 +154,7 @@ public class PlayerScript : MonoBehaviour
     {
 
     }
+
+
+
 }

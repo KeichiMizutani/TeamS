@@ -5,9 +5,7 @@ using UnityEngine;
 public class StageManager : MonoBehaviour
 {
     [SerializeField] GameObject plane;
-    [SerializeField] GameObject player;
-    [SerializeField] GameObject cameraA;
-    [SerializeField] GameObject cameraB;
+
  
 
     public int length;
@@ -47,7 +45,7 @@ public class StageManager : MonoBehaviour
         }
     }
 
-    IEnumerator CreateNewPanel()
+    public IEnumerator CreateNewPanel()
     {
         for (int dx = 0; dx < width; dx++)
         {
